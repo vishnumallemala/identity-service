@@ -1,3 +1,4 @@
+// validates the payload whether email or phonenumber is present
 let validateIdentityPayload = (identity) => {
   if (
     (identity.email && identity.email.trim() !== '') ||
