@@ -9,6 +9,14 @@ app.use(express.json());
 
 app.use('/identity', identityRoutes);
 
+app.get('/', (req, res) => {
+  res
+    .status(200)
+    .send(
+      'Beckend Server for Identity-Reconsilation is up and running. Please perform post operation on /identity with an object containing email/phoneNumber to create new contact'
+    );
+});
+
 (async () => {
   try {
     await sequelize.sync();
