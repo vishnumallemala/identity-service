@@ -42,7 +42,7 @@ DB_DIALECT=postgres
 $ npm start
 ```
 
-The application is running on [localhost](http:localhost:3000/identity) and on [render](http://localhost:3000).
+The application is running on [localhost](http:localhost:3000/) and on [render](https://identity-service-bite-speed-assign.onrender.com).
 
 ## API
 

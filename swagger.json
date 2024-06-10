@@ -1,0 +1,135 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Identity Service",
+    "description": "API for handling identity by email or phone number.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/identity": {
+      "post": {
+        "summary": "Handle identity by email or phone number",
+        "description": "Takes a JSON object with email or phone number and returns contact details.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "description": "Email address of the contact.",
+                    "example": "user@example.com"
+                  },
+                  "phoneNumber": {
+                    "type": "string",
+                    "description": "Phone number of the contact.",
+                    "example": "1234567890"
+                  }
+                },
+                "anyOf": [
+                  { "required": ["email"] },
+                  { "required": ["phoneNumber"] }
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response with contact details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "contact": {
+                      "type": "object",
+                      "properties": {
+                        "primaryContactId": {
+                          "type": "integer",
+                          "description": "The primary contact ID.",
+                          "example": 4
+                        },
+                        "emails": {
+                          "type": "array",
+                          "description": "List of email addresses.",
+                          "items": {
+                            "type": "string",
+                            "format": "email"
+                          },
+                          "example": [
+                            "george@hillvalley.edu",
+                            "biffsucks@hillvalley.edu"
+                          ]
+                        },
+                        "phoneNumbers": {
+                          "type": "array",
+                          "description": "List of phone numbers.",
+                          "items": {
+                            "type": "string"
+                          },
+                          "example": ["919191", "717171"]
+                        },
+                        "secondaryContactIds": {
+                          "type": "array",
+                          "description": "List of secondary contact IDs.",
+                          "items": {
+                            "type": "integer"
+                          },
+                          "example": [5]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Contact": {
+        "type": "object",
+        "properties": {
+          "primaryContactId": {
+            "type": "integer",
+            "description": "The primary contact ID.",
+            "example": 4
+          },
+          "emails": {
+            "type": "array",
+            "description": "List of email addresses.",
+            "items": {
+              "type": "string",
+              "format": "email"
+            },
+            "example": ["george@hillvalley.edu", "biffsucks@hillvalley.edu"]
+          },
+          "phoneNumbers": {
+            "type": "array",
+            "description": "List of phone numbers.",
+            "items": {
+              "type": "string"
+            },
+            "example": ["919191", "717171"]
+          },
+          "secondaryContactIds": {
+            "type": "array",
+            "description": "List of secondary contact IDs.",
+            "items": {
+              "type": "integer"
+            },
+            "example": [5]
+          }
+        }
+      }
+    }
+  }
+}
